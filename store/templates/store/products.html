@@ -106,13 +106,27 @@
                                         </div>
                                     </li>
                                     <li>
-                                         <div class="form-group">
+                                        <div class="form-group">
                                             <label class="label" for="id_status">Status</label>
-                                             <select class="form-control" id="id_status" name="status">
-                                    <option value="1">Sale</option>
-                                    <option value="2">New Arrival</option>
-                                    <option value="3">Best Seller</option>
-                                </select>
+                                            <select class="form-control" id="id_status" name="status">
+                                                <option value="1">Sale</option>
+                                                <option value="2">New Arrival</option>
+                                                <option value="3">Best Seller</option>
+                                            </select>
+
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-group">
+                                            <label class="label" for="id_category">Category</label>
+                                            <select class="form-control" id="id_category" name="category">
+                                                <option value="1">Skirts</option>
+                                                <option value="2">Pantaloon</option>
+                                                <option value="3">T-shirt</option>
+                                                <option value="4">Sweatshirt</option>
+                                                <option value="5">Pullover</option>
+
+                                            </select>
 
                                         </div>
                                     </li>
@@ -134,23 +148,29 @@
             </div>
         </div>
     </section>
+    <div style="display:flex;" id="myBtn" title="Go to top">
+        <a href="#" style="display:flex;" class="btn-cart" aria-haspopup="true" aria-expanded="false">
+            <span class="flaticon-shopping-bag"></span>
+            <div class="d-flex justify-content-center align-items-center"><small id="cart"></small></div>
+        </a>
+    </div>
 
 {% endblock body %}
 
 {% block javascript %}
-<script>
-      var user_cart = sessionStorage.getItem('user_cart');
-    $(() => {
-        $('a.sara').click(function() {
-    var id = $(this).attr('id');
-    user_cart.push(id);
-        $("#cart").empty();
-        $("#cart").append(`${user_cart.length}`);
-    sessionStorage.setItem('user_cart' , user_cart);
-    alert(id);
-});
+    <script>
+        var user_cart = []
+        sessionStorage.setItem('user_cart', user_cart);
+        $(() => {
+            $('a.sara').click(function () {
+                var id = $(this).attr('id');
+                user_cart.push(id);
+                $("#cart").empty();
+                $("#cart").append(`${user_cart.length}`);
+                sessionStorage.setItem('user_cart', user_cart);
+            });
 
-    });
-</script>
+        });
+    </script>
 
 {% endblock javascript %}

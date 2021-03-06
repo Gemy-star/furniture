@@ -10,22 +10,27 @@ from django.views.generic import View
 
 
 def add_product(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and request.FILES:
         name = request.POST.get('name')
         image = request.FILES['image']
         price = request.POST.get('price')
         quantity = request.POST.get('quantity')
         status = request.POST.get('status')
+        category = request.POST.get('category')
         fs = FileSystemStorage()
         filename = fs.save(image.name, image)
-        product = models.Products(name=name, image=image, status=int(status), price=price, quantity=quantity)
+        product = models.Products(name=name, category=category, image=image, status=int(status), price=price,
+                                  quantity=quantity)
         product.save()
         if product.pk:
-            return redirect('home_page')
+            return redirect('search-product')
         else:
             return redirect('home_page')
     return render(request, 'store/add_product.html')
 
+
+# def update_Session(request):
+#     if request.method == "POST" and request.is_ajax:
 
 def search_products(request):
     products = models.Products.objects.all()

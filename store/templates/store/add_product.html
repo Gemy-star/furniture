@@ -7,7 +7,7 @@
 
 {% block body %}
 
-   <section class="hero-wrap hero-wrap-2" style="background-image: url('../../../static/images/bg_2.jpg');"
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('../../../static/images/bg_2.jpg');"
              data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
@@ -74,7 +74,8 @@
                             <div class="col-md-7">
                                 <div class="contact-wrap w-100 p-md-5 p-4">
                                     <h3 class="mb-4">Add Product</h3>
-                                    <form method="POST" id="contactForm" enctype= "multipart/form-data" name="contactForm" class="contactForm">
+                                    <form method="POST" id="contactForm" enctype="multipart/form-data"
+                                          name="contactForm" class="contactForm">
                                         {% csrf_token %}
                                         <div class="row">
                                             <div class="col-md-6">
@@ -101,22 +102,38 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                                                                        <div class="col-md-12">
-<div class="input-group col-md-6 d-flex mb-3">
-                                                        <label class="label" for="quantity">Quantity</label>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="label" for="category">Category</label>
+                                                    <select id="category" name="category" class="form-control">
+                                                        <option value="1">Skirts</option>
+                                                        <option value="2"> Pantaloon</option>
+                                                        <option value="3"> T-shirt</option>
+                                                        <option value="4"> Sweatshirt</option>
+                                                        <option value="5"> Pullover</option>
+                                                    </select>
+                                                </div>
+                                            </div>
 
-	             	<span class="input-group-btn mr-2">
+                                            <div class="col-md-12">
+                                                <div class="input-group col-md-6 d-flex mb-3">
+                                                    <label class="label" for="quantity">Quantity</label>
+
+                                                    <span class="input-group-btn mr-2">
 	                	<button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
 	                   <i class="fa fa-minus"></i>
 	                	</button>
 	            		</span>
-	             	<input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-	             	<span class="input-group-btn ml-2">
+                                                    <input type="text" id="quantity" name="quantity"
+                                                           class="quantity form-control input-number" value="1" min="1"
+                                                           max="100">
+                                                    <span class="input-group-btn ml-2">
 	                	<button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
 	                     <i class="fa fa-plus"></i>
 	                 </button>
 	             	</span>
-	          	</div>                                            </div>
+                                                </div>
+                                            </div>
 
                                             <div class="col-md-12">
                                                 <div class="form-group">
@@ -125,12 +142,12 @@
                                                            placeholder="Image">
                                                 </div>
                                             </div>
-                                                                                    <div class="col-md-12">
-                                            <div class="form-group">
-                                                <input type="submit" value="Add" class="btn btn-primary">
-                                                <div class="submitting"></div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input type="submit" value="Add" class="btn btn-primary">
+                                                    <div class="submitting"></div>
+                                                </div>
                                             </div>
-                                        </div>
 
                                         </div>
                                     </form>
@@ -138,7 +155,8 @@
                             </div>
                             <div class="col-md-5 order-md-first d-flex align-items-stretch">
                                 <div class="map">
-                                    <img class="img-fluid" style="width: 29rem;height: 78vh;" src="{% static 'images/image_5.jpg' %}"/>
+                                    <img class="img-fluid" style="width: 29rem;height: 92vh;"
+                                         src="{% static 'images/image_5.jpg' %}"/>
                                 </div>
                             </div>
                         </div>
@@ -153,39 +171,39 @@
 
 {% block javascript %}
     <script>
-		$(document).ready(function(){
+        $(document).ready(function () {
 
-		var quantitiy=0;
-		   $('.quantity-right-plus').click(function(e){
+            var quantitiy = 0;
+            $('.quantity-right-plus').click(function (e) {
 
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var quantity = parseInt($('#quantity').val());
 
-		        // If is not undefined
+                // If is not undefined
 
-		            $('#quantity').val(quantity + 1);
+                $('#quantity').val(quantity + 1);
 
 
-		            // Increment
+                // Increment
 
-		    });
+            });
 
-		     $('.quantity-left-minus').click(function(e){
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
+            $('.quantity-left-minus').click(function (e) {
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var quantity = parseInt($('#quantity').val());
 
-		        // If is not undefined
+                // If is not undefined
 
-		            // Increment
-		            if(quantity>0){
-		            $('#quantity').val(quantity - 1);
-		            }
-		    });
+                // Increment
+                if (quantity > 0) {
+                    $('#quantity').val(quantity - 1);
+                }
+            });
 
-		});
-	</script>
+        });
+    </script>
 {% endblock javascript %}
