@@ -29,8 +29,12 @@ def add_product(request):
     return render(request, 'store/add_product.html')
 
 
-# def update_Session(request):
-#     if request.method == "POST" and request.is_ajax:
+def update_Session(request):
+    if request.method == "POST" and request.is_ajax:
+        items = request.POST.getlist('items[]')
+        request.session['items'] = items
+        return HttpResponse('Success')
+
 
 def search_products(request):
     products = models.Products.objects.all()
@@ -38,6 +42,27 @@ def search_products(request):
     prods = prod_filter.qs
     context = {"products": prods, "myfilter": prod_filter}
     return render(request, 'store/products.html', context=context)
+
+
+def checkout(request):
+    items = request.session['items']
+    items_obj = models.Products.objects.filter(pk__in=items)
+    total = 0
+    for item in items_obj:
+        total = total + item.price
+    context = {"items": items_obj, 'total': total}
+    if request.method == 'POST' and request.is_ajax:
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        voucher = models.Voucher(name=name, address=address, phone=phone)
+        voucher.save()
+        voucher.products.set(items_obj)
+        if voucher.pk:
+            return HttpResponse('success')
+        else:
+            return HttpResponse('fail')
+    return render(request, 'store/cart.html', context=context)
 
 
 class ProductAllReport(View):

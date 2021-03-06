@@ -35,10 +35,11 @@ class WishList(models.Model):
 
 
 class Voucher(models.Model):
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=255, null=True, blank=True)
+    phone = models.IntegerField(null=True, blank=True)
+    address = models.CharField(max_length=255, null=True, blank=True)
     products = models.ManyToManyField(Products, null=True, blank=True)
-    date_checked = models.DateTimeField(auto_now_add=True)
+    date_checked = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
-        return self.customer.first_name
-
+        return self.name
